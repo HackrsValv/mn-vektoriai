@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mažeikių Nafta – Interesų vektoriai 3D</title>
+    <title>Mažeikių Nafta – SVF Analizė | Submerged Vector Framework</title>
+    <meta name="description" content="Orlen Lietuva interesų vektorių 3D vizualizacija. Submerged Vector Framework metodika emergentinio elgesio analizei.">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         * {
@@ -31,8 +32,26 @@
         .subtitle {
             text-align: center;
             color: #a0a0a0;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             font-size: 1rem;
+        }
+        .framework-badge {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .framework-badge a {
+            display: inline-block;
+            background: rgba(79, 195, 247, 0.15);
+            border: 1px solid rgba(79, 195, 247, 0.4);
+            color: #4fc3f7;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .framework-badge a:hover {
+            background: rgba(79, 195, 247, 0.3);
         }
 
         .main-grid {
@@ -372,12 +391,91 @@
         }
         .why-persists h3 { color: #ff9800; margin-bottom: 12px; }
         .why-persists p { color: #c0c0c0; line-height: 1.6; font-size: 0.95rem; }
+
+        /* Taleb citatos */
+        .quote-box {
+            background: rgba(156, 39, 176, 0.08);
+            border-left: 4px solid #9c27b0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .quote-box blockquote {
+            color: #d0d0d0;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .quote-box .attribution {
+            color: #9c27b0;
+            font-size: 0.8rem;
+            text-align: right;
+        }
+
+        /* Teorinis pagrindas */
+        .theory-section {
+            background: rgba(33, 150, 243, 0.08);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .theory-section h3 { color: #2196f3; margin-bottom: 15px; }
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .theory-item {
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .theory-item h5 {
+            color: #4fc3f7;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+        .theory-item p {
+            color: #888;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #555;
+            font-size: 0.75rem;
+        }
+        .footer a {
+            color: #4fc3f7;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Mažeikių Nafta (Orlen Lietuva)</h1>
         <p class="subtitle">Paslėpti interesų vektoriai 3D erdvėje · Matomas tik elgesys</p>
+        <div class="framework-badge">
+            <a href="https://github.com/HackrsValv/mn-vektoriai">📐 Submerged Vector Framework (SVF)</a>
+        </div>
+
+        <!-- Taleb citata įžangai -->
+        <div class="quote-box">
+            <blockquote>
+                "The ensemble behaves in ways not predicted by the components. The interactions matter more than the nature of the units."
+            </blockquote>
+            <div class="attribution">— Nassim Nicholas Taleb, "Parts vs Whole"</div>
+        </div>
 
         <!-- PESTEL Section -->
         <div class="pestel-section">
@@ -404,7 +502,7 @@
                     <div class="viz-legend-item"><span class="viz-dot" style="background:#4caf50;"></span>Darbuotojai</div>
                     <div class="viz-legend-item"><span class="viz-dot" style="background:#2196f3;"></span>Vadovybė</div>
                     <div class="viz-legend-item"><span class="viz-dot" style="background:#9c27b0;"></span>Tiekėjai</div>
-                    <div class="viz-legend-item viz-sum"><span class="viz-dot" style="background:#4fc3f7;"></span>ELGESYS (Σ)</div>
+                    <div class="viz-legend-item viz-sum"><span class="viz-dot" style="background:#4fc3f7;"></span>Σ ELGESYS</div>
                 </div>
                 <div class="viz-axes">
                     <span>X: Pelnas →</span>
@@ -417,46 +515,46 @@
                 <div class="mode-indicator" id="modeIndicator">
                     Dabartinis: paslėpti interesai
                 </div>
-                <p class="pause-hint">Punktyriniai = paslėpti motyvai · Ryškus = suma (stebimas elgesys)</p>
+                <p class="pause-hint">Punktyriniai = submerged (paslėpti) · Ryškus = suma (stebimas elgesys)</p>
             </div>
 
             <!-- Legend -->
             <div class="legend-panel">
-                <h3>Dalyviai: paslėpta → matoma</h3>
+                <h3>Dalyviai: submerged → surface</h3>
 
                 <div class="legend-item" style="border-color: #e94560;">
                     <div class="actor" style="color:#e94560;">PKN Orlen (savininkas)</div>
-                    <div class="hidden">🔒 Paslėpta: Maksimalūs dividendai, Lenkijos strateginiai interesai</div>
-                    <div class="behavior">👁 Elgesys: „Optimizuojame veiklą ir investicijų portfelį"</div>
+                    <div class="hidden">🔒 Submerged: Maksimalūs dividendai, Lenkijos strateginiai interesai</div>
+                    <div class="behavior">👁 Surface: „Optimizuojame veiklą ir investicijų portfelį"</div>
                 </div>
 
                 <div class="legend-item" style="border-color: #ffc107;">
                     <div class="actor" style="color:#ffc107;">Lietuvos valstybė</div>
-                    <div class="hidden">🔒 Paslėpta: Politiniai taškai, rinkėjai Mažeikiuose, energetinė nepriklausomybė</div>
-                    <div class="behavior">👁 Elgesys: „Giname nacionalinius interesus"</div>
+                    <div class="hidden">🔒 Submerged: Politiniai taškai, rinkėjai Mažeikiuose, energetinė nepriklausomybė</div>
+                    <div class="behavior">👁 Surface: „Giname nacionalinius interesus"</div>
                 </div>
 
                 <div class="legend-item" style="border-color: #4caf50;">
                     <div class="actor" style="color:#4caf50;">Darbuotojai (~1200)</div>
-                    <div class="hidden">🔒 Paslėpta: Bijau netekti darbo, turiu paskolą, vaikai mokykloje</div>
-                    <div class="behavior">👁 Elgesys: „Reikalaujame sąžiningo atlygio ir saugių sąlygų"</div>
+                    <div class="hidden">🔒 Submerged: Bijau netekti darbo, turiu paskolą, vaikai mokykloje</div>
+                    <div class="behavior">👁 Surface: „Reikalaujame sąžiningo atlygio ir saugių sąlygų"</div>
                 </div>
 
                 <div class="legend-item" style="border-color: #2196f3;">
                     <div class="actor" style="color:#2196f3;">Vadovybė</div>
-                    <div class="hidden">🔒 Paslėpta: Metinis bonusas už KPI, karjera Orlen grupėje</div>
-                    <div class="behavior">👁 Elgesys: „Vykdome akcininkų patvirtintą strategiją"</div>
+                    <div class="hidden">🔒 Submerged: Metinis bonusas už KPI, karjera Orlen grupėje</div>
+                    <div class="behavior">👁 Surface: „Vykdome akcininkų patvirtintą strategiją"</div>
                 </div>
 
                 <div class="legend-item" style="border-color: #9c27b0;">
                     <div class="actor" style="color:#9c27b0;">Naftos tiekėjai</div>
-                    <div class="hidden">🔒 Paslėpta: Kuo ilgesni kontraktai, priklausomybės sukūrimas</div>
-                    <div class="behavior">👁 Elgesys: „Siūlome konkurencingas kainas ir patikimą tiekimą"</div>
+                    <div class="hidden">🔒 Submerged: Kuo ilgesni kontraktai, priklausomybės sukūrimas</div>
+                    <div class="behavior">👁 Surface: „Siūlome konkurencingas kainas ir patikimą tiekimą"</div>
                 </div>
 
                 <div class="legend-item" style="border-color: #4fc3f7; background: rgba(79,195,247,0.1);">
-                    <div class="actor" style="color:#4fc3f7;">👁 ELGESYS (suma)</div>
-                    <div class="hidden" style="color:#a0a0a0;">Tai, ką matome. Vektorius (priežastis) – tik spėjame.</div>
+                    <div class="actor" style="color:#4fc3f7;">👁 Σ ELGESYS (suma)</div>
+                    <div class="hidden" style="color:#a0a0a0;">Tai, ką stebime. Vektorius (priežastis) – tik spėjame.</div>
                 </div>
             </div>
         </div>
@@ -464,7 +562,7 @@
         <!-- Layers explanation -->
         <div class="layers-explanation">
             <div class="layer-box hidden-box">
-                <h4>🔒 Paslėptas sluoksnis (nematomas)</h4>
+                <h4>🔒 Submerged Layer (nematomas)</h4>
                 <p>
                     Tikrosios motyvacijos egzistuoja tik dalyvių galvose. Mes jų <strong>nematome tiesiogiai</strong> –
                     galime tik spėti iš elgesio (indukcija) arba iš teorijų (dedukcija).
@@ -474,7 +572,7 @@
                 </p>
             </div>
             <div class="layer-box visible-box">
-                <h4>👁 Matomas sluoksnis (stebimas)</h4>
+                <h4>👁 Surface Layer (stebimas)</h4>
                 <p>
                     Matome tik <strong>elgesį</strong>: sprendimus, veiksmus, viešus pasisakymus.
                     <br><br>
@@ -484,10 +582,18 @@
             </div>
         </div>
 
+        <!-- Taleb citata apie opacity -->
+        <div class="quote-box">
+            <blockquote>
+                "In an opaque system, operators have an incentive to hide risk, taking upside without downside."
+            </blockquote>
+            <div class="attribution">— Nassim Nicholas Taleb, "Skin in the Game" (2018)</div>
+        </div>
+
         <div class="key-concept">
-            <h3>🎯 Pagrindinė įžvalga</h3>
+            <h3>🎯 Pagrindinė SVF įžvalga</h3>
             <p>
-                <strong>Vektorių suma</strong> (ELGESYS) rodo kryptį, kurios <strong>niekas individualiai nesiekė</strong>.
+                <strong>Vektorių suma</strong> (Σ ELGESYS) rodo kryptį, kurios <strong>niekas individualiai nesiekė</strong>.
                 Kiekvienas dalyvis elgiasi racionaliai <strong>savo pozicijoje</strong> (Olson, 1965).
                 Bet kadangi jie mato sistemą tik <strong>per savo prizmę</strong> (von Foerster),
                 o tarp jų interesų egzistuoja <strong>nuolatinė įtampa</strong>, galutinis rezultatas yra
@@ -500,9 +606,9 @@
             <p>
                 <strong>Stebime:</strong> Orlen Lietuva sumažino investicijas į modernizaciją.
                 <br><br>
-                <strong>Galimi paslėpti motyvai:</strong><br>
+                <strong>Galimi submerged motyvai:</strong><br>
                 • Orlen: „Perkeliame kapitalą į Lenkiją" · Vadovybė: „Mano bonusas priklauso nuo EBITDA"<br>
-                • Oficialus elgesys: „Optimizuojame pagal rinkos sąlygas"
+                • Oficialus elgesys (surface): „Optimizuojame pagal rinkos sąlygas"
                 <br><br>
                 <strong>Problema:</strong> Lietuva spėja „nori uždaryti" → Orlen gal tik maksimizuoja short-term →
                 Skirtingi spėjimai → eskalacija.
@@ -529,11 +635,11 @@
 
         <!-- Two-Pass metodologija -->
         <div class="methodology-section">
-            <h3>🎯 SPRENDIMAS: Two-Pass metodas (Real Economics)</h3>
+            <h3>🎯 SPRENDIMAS: SVF Two-Pass metodas</h3>
             <div class="pass-container">
                 <div class="pass-box pass1">
-                    <h4>PASS 1: Transliacijos → Skaidrumas</h4>
-                    <p>Ištransliuoti paslėptą sluoksnį į viešą. Ne „demaskuoti", o sukurti aplinką,
+                    <h4>PASS 1: Legitimization → Skaidrumas</h4>
+                    <p>Ištransliuoti submerged sluoksnį į surface. Ne „demaskuoti", o sukurti aplinką,
                     kur <strong>tikri interesai yra legitimūs</strong>.</p>
                     <ul>
                         <li>Orlen: „Norime maksimalaus ROI" → OK, tai normalu</li>
@@ -543,7 +649,7 @@
                     </ul>
                 </div>
                 <div class="pass-box pass2">
-                    <h4>PASS 2: Transformacijos → Win-Win</h4>
+                    <h4>PASS 2: Transformation → Win-Win</h4>
                     <p>Surasti mechanizmus, kur <strong>vienos grupės interesai patenkinami per kitos
                     grupės interesus</strong>. Ne kompromisas, o dizainas.</p>
                     <ul>
@@ -599,15 +705,64 @@
             </table>
         </div>
 
+        <!-- Taleb Skin in the Game -->
+        <div class="quote-box">
+            <blockquote>
+                "You must eat your own cooking. Systems with skin in the game are self-correcting through elimination of bad actors."
+            </blockquote>
+            <div class="attribution">— Nassim Nicholas Taleb, "Skin in the Game" (2018)</div>
+        </div>
+
         <div class="key-concept" style="margin-top: 30px; background: rgba(76, 175, 80, 0.1); border-color: rgba(76, 175, 80, 0.4);">
-            <h3 style="color: #4caf50;">✅ Rezultatas: PROFIT!</h3>
+            <h3 style="color: #4caf50;">✅ Rezultatas: Alignment per dizainą</h3>
             <p>
-                Kai paslėpti interesai tampa viešais ir legitimiais, <strong>derybos tampa galimos</strong>.
+                Kai submerged interesai tampa surface ir legitimiais, <strong>derybos tampa galimos</strong>.
                 Kai derybos vyksta ties tikrais interesais (ne pozicijomis), <strong>win-win dizainas tampa įmanomas</strong>.
                 <br><br>
                 <strong>Vizualizacijoje:</strong> paspausk „WHAT IF?" mygtuką, kad pamatytum, kaip keičiasi
                 vektoriai, kai interesai tampa skaidrūs. Vektoriai <strong>suartėja</strong>, nes dalyviai
                 pradeda ieškoti bendrų taškų, o ne slėpti savo tikslus.
+            </p>
+        </div>
+
+        <!-- Teorinis pagrindas -->
+        <div class="theory-section">
+            <h3>📚 Teorinis pagrindas (SVF šaltiniai)</h3>
+            <div class="theory-grid">
+                <div class="theory-item">
+                    <h5>Taleb, N.N. (2018)</h5>
+                    <p>Skin in the Game: Hidden Asymmetries in Daily Life. Paslėptos asimetrijos, rizikos pasidalijimas.</p>
+                </div>
+                <div class="theory-item">
+                    <h5>Olson, M. (1965)</h5>
+                    <p>Logic of Collective Action. Individualiai optimalu ≠ kolektyviai optimalu.</p>
+                </div>
+                <div class="theory-item">
+                    <h5>von Foerster, H.</h5>
+                    <p>Second-order Cybernetics. Stebėtojas yra sistemos dalis; ribota perspektyva.</p>
+                </div>
+                <div class="theory-item">
+                    <h5>Ashby, W.R.</h5>
+                    <p>Law of Requisite Variety. Sudėtingumui valdyti reikia atitinkamo sudėtingumo.</p>
+                </div>
+                <div class="theory-item">
+                    <h5>MAEBE (2025)</h5>
+                    <p>Multi-Agent Emergent Behavior. Ensemble moralinis samprotavimas nenuspėjamas iš atskirų agentų.</p>
+                </div>
+                <div class="theory-item">
+                    <h5>Emergent Alignment (2025)</h5>
+                    <p>Convex hull of utilities. Kai user utility yra agentų convex hull viduje → galimas alignment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                <strong>Submerged Vector Framework (SVF)</strong> · Agent-agnostic metodika emergentinio elgesio analizei
+                <br>
+                <a href="https://github.com/HackrsValv/mn-vektoriai">GitHub</a> · 
+                Sukurta 2025
             </p>
         </div>
     </div>
@@ -827,7 +982,7 @@
         });
 
         // ============================================
-        // WHAT-IF: Skaidrių interesų režimas
+        // WHAT-IF: Aligned interests režimas
         // ============================================
 
         // Vektoriai skaidrumo režime - suartėja link bendro taško
@@ -862,7 +1017,7 @@
             const newSum = new THREE.Vector3(0, 0, 0);
 
             currentVectors.forEach(v => {
-                // Skaidrumo režime - solidūs (ne punktyriniai), nes visi mato
+                // Aligned režime - solidūs (ne punktyriniai), nes visi mato
                 const vecObj = createVector(origin, v.end, v.color, !useTransparent);
                 scene.add(vecObj);
                 vectorObjects.push(vecObj);
@@ -884,12 +1039,12 @@
             if (isTransparentMode) {
                 whatifBtn.classList.add('active');
                 whatifBtn.textContent = '🔒 GRĮŽTI';
-                modeIndicator.textContent = 'SKAIDRUMAS: vektoriai suartėja!';
+                modeIndicator.textContent = 'ALIGNED: vektoriai suartėja!';
                 modeIndicator.classList.add('transparent-mode');
             } else {
                 whatifBtn.classList.remove('active');
                 whatifBtn.textContent = '🔓 WHAT IF?';
-                modeIndicator.textContent = 'Dabartinis: paslėpti interesai';
+                modeIndicator.textContent = 'Dabartinis: submerged interesai';
                 modeIndicator.classList.remove('transparent-mode');
             }
 
